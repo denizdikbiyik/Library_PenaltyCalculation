@@ -1,0 +1,70 @@
+﻿@model Library_PenaltyCalculation.Models.ReturnBook
+
+@{
+    ViewData["Title"] = "Penalty";
+}
+
+<h1>Calculate Penalty</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Penalty">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CheckedOutDate" class="control-label">Checkout Date</label>
+                <input asp-for="CheckedOutDate" class="form-control" />
+                <span asp-validation-for="CheckedOutDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReturnDate" class="control-label">Return Date</label>
+                <input asp-for="ReturnDate" class="form-control" />
+                <span asp-validation-for="ReturnDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CountryId" class="control-label">Country</label>
+                <select asp-for="CountryId" class="form-control" asp-items="ViewBag.CountryId"></select>
+                <span asp-validation-for="CountryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Calculate Penalty" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<br />
+<br />
+
+
+
+
+
+
+
+    <div>
+        <h4>Result:</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-10">
+                Calculated Business Days: 
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CalculatedBusinessDays)
+            </dd>
+            <dt class="col-sm-10">
+                Calculated Penalty: 
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CalculatedPenalty)
+                @Html.DisplayFor(model => model.Country.CountryMoneyType)
+            </dd>
+        </dl>
+    </div>
+
+
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
